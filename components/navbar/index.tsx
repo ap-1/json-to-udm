@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { TransformIcon } from "@radix-ui/react-icons";
+import { GitHubLogoIcon, TransformIcon } from "@radix-ui/react-icons";
 
 import { Content } from "@/components/content";
 import { ThemeSwitcher } from "@/components/navbar/theme-switcher";
 import { DisplaySwitcher } from "@/components/navbar/display-switcher";
+import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
 	return (
@@ -18,6 +19,15 @@ export const Navbar = () => {
 			<div className="flex items-center gap-x-2">
 				<DisplaySwitcher />
 				<ThemeSwitcher />
+
+				<Link
+					href="https://github.com/ap-1/json-to-udm"
+					target="_blank"
+				>
+					<Button variant="secondary" size="icon">
+						<GitHubLogoIcon className="size-5" />
+					</Button>
+				</Link>
 			</div>
 		</Content>
 	);
