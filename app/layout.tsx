@@ -11,7 +11,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
 	title: "JSON to UDM",
-	description: "Convert JSON responses to UDM with AI",
+	description: "Convert JSON responses into UDM with AI",
 };
 
 export default function RootLayout({ children }: PropsWithChildren) {
