@@ -24,7 +24,7 @@ export const Navbar = () => {
 					href="https://github.com/ap-1/json-to-udm"
 					target="_blank"
 				>
-					<Button variant="secondary" size="icon">
+					<Button variant="ghost" size="icon">
 						<GitHubLogoIcon className="size-5" />
 					</Button>
 				</Link>

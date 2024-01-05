@@ -23,7 +23,7 @@ export const ThemeSwitcher = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="secondary" size="icon">
+				<Button variant="ghost" size="icon">
 					<SunIcon className="transition-all scale-100 rotate-0 size-5 dark:-rotate-90 dark:scale-0" />
 					<MoonIcon className="absolute transition-all scale-0 rotate-90 size-5 dark:rotate-0 dark:scale-100" />
 

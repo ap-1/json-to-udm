@@ -1,16 +1,23 @@
 "use client";
 
 import { useAtomValue } from "jotai/react";
-import type { ForwardRefExoticComponent, RefAttributes } from "react";
+import {
+	forwardRef,
+	type ElementRef,
+	type ForwardRefExoticComponent,
+	type RefAttributes,
+} from "react";
 
 import { PlusIcon } from "@radix-ui/react-icons";
 import type { IconProps } from "@radix-ui/react-icons/dist/types";
 
+import { Modal } from "@/components/modal";
+import { CardItem } from "@/components/card-item";
 import { Content } from "@/components/content";
 import { displayAtom } from "@/components/navbar/display-switcher";
+
 import { useCards } from "@/lib/hooks/use-cards";
 import { cn } from "@/lib/utils";
-import { CardItem } from "@/components/card-item";
 
 interface ItemProps {
 	text: string;
@@ -18,35 +25,53 @@ interface ItemProps {
 	Icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>;
 }
 
-const GridItem = ({ text, subtext, Icon }: ItemProps) => {
-	return (
-		<button className="animate-in slide-in-from-left-2 relative flex items-end border rounded-md group bg-gradient-to-b from-background to-secondary/40 dark:from-secondary/40 from-50% dark:to-background h-80 w-full md:size-80">
-			<Icon className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 size-20" />
+const GridItem = forwardRef<
+	ElementRef<"button">,
+	React.ComponentPropsWithoutRef<"button"> & ItemProps
+>(({ text, subtext, className, Icon, ...props }, ref) => (
+	<button
+		ref={ref}
+		className={cn(
+			"animate-in slide-in-from-left-2 relative flex items-end border rounded-md group bg-gradient-to-b from-background to-secondary/40 dark:from-secondary/40 from-50% dark:to-background h-80 w-full md:size-80",
+			className
+		)}
+		{...props}
+	>
+		<Icon className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 size-20" />
 
-			<div className="p-4 text-start">
-				<p>{text}</p>
-				{subtext && (
-					<p className="text-sm text-muted-foreground">{subtext}</p>
-				)}
-			</div>
-		</button>
-	);
-};
+		<div className="p-4 text-start">
+			<p>{text}</p>
+			{subtext && (
+				<p className="text-sm text-muted-foreground">{subtext}</p>
+			)}
+		</div>
+	</button>
+));
+GridItem.displayName = "GridItem";
 
-const ListItem = ({ text, subtext, Icon }: ItemProps) => {
-	return (
-		<button className="flex flex-col w-full p-4 transition-all bg-transparent border rounded-md sm:flex-row sm:justify-between animate-in slide-in-from-top-2 hover:bg-secondary/40 sm:h-14">
-			<div className="flex gap-2">
-				<Icon className="size-6" />
-				<p className="font-semibold">{text}</p>
-			</div>
+const ListItem = forwardRef<
+	ElementRef<"button">,
+	React.ComponentPropsWithoutRef<"button"> & ItemProps
+>(({ text, subtext, className, Icon, ...props }, ref) => (
+	<button
+		ref={ref}
+		className={cn(
+			"flex flex-col w-full p-4 transition-all bg-transparent border rounded-md sm:flex-row sm:justify-between animate-in slide-in-from-top-2 hover:bg-secondary/40 sm:h-14",
+			className
+		)}
+		{...props}
+	>
+		<div className="flex gap-2">
+			<Icon className="size-6" />
+			<p className="font-semibold">{text}</p>
+		</div>
 
-			<p className="pl-8 my-auto text-sm sm:pl-0 text-start text-muted-foreground">
-				{subtext}
-			</p>
-		</button>
-	);
-};
+		<p className="pl-8 my-auto text-sm sm:pl-0 text-start text-muted-foreground">
+			{subtext}
+		</p>
+	</button>
+));
+ListItem.displayName = "ListItem";
 
 export default function Home() {
 	const display = useAtomValue(displayAtom);
@@ -74,13 +99,14 @@ export default function Home() {
 				)}
 			>
 				{items.map((item, i) => (
-					<CardItem
-						key={item.text}
-						ref={refs.current[i]}
-						perspective={display === "grid"}
-					>
-						<Item {...item} />
-					</CardItem>
+					<Modal key={item.text}>
+						<CardItem
+							ref={refs.current[i]}
+							perspective={display === "grid"}
+						>
+							<Item {...item} />
+						</CardItem>
+					</Modal>
 				))}
 			</Content>
 		</>

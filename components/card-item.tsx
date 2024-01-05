@@ -18,7 +18,7 @@ interface CardItemProps {
 export const CardItem = forwardRef<
 	HTMLDivElement,
 	PropsWithChildren<CardItemProps>
->(({ children, onClick, className, perspective }, ref) => {
+>(({ children, className, perspective, ...props }, ref) => {
 	const clonedRef = useClonedRef<HTMLDivElement>(ref);
 
 	const onMouseMove: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -42,13 +42,13 @@ export const CardItem = forwardRef<
 		<div
 			ref={clonedRef}
 			onMouseMove={onMouseMove}
-			onClick={onClick}
 			className={cn(
 				className,
 				"dark:bg-inherit will-change-transform rounded-md cursor-pointer group",
 				"before:bg-[radial-gradient(800px_circle_at_var(--mouse-x)_var(--mouse-y),hsla(var(--foreground)/0.06),transparent_40%)]",
 				"before:z-30 hover:before:opacity-100 before:select-none before:pointer-events-none before:opacity-0 before:transition-opacity before:duration-500 before:rounded-[inherit] before:content-[''] before:h-full before:left-0 before:absolute before:top-0 before:w-full"
 			)}
+			{...props}
 		>
 			{children}
 		</div>
