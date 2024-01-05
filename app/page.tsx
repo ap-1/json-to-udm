@@ -88,27 +88,24 @@ export default function Home() {
 	const [refs, onMouseMove] = useCards(items.length);
 
 	return (
-		<>
-			<Content
-				as="div"
-				onMouseMove={onMouseMove}
-				className={cn(
-					"group/cards gap-4 py-8 grid grid-cols-1",
-					display === "grid" &&
-						"md:grid-cols-[repeat(auto-fill,20rem)]"
-				)}
-			>
-				{items.map((item, i) => (
-					<Modal key={item.text}>
-						<CardItem
-							ref={refs.current[i]}
-							perspective={display === "grid"}
-						>
-							<Item {...item} />
-						</CardItem>
-					</Modal>
-				))}
-			</Content>
-		</>
+		<Content
+			as="div"
+			onMouseMove={onMouseMove}
+			className={cn(
+				"group/cards gap-4 py-8 grid grid-cols-1",
+				display === "grid" && "md:grid-cols-[repeat(auto-fill,20rem)]"
+			)}
+		>
+			{items.map((item, i) => (
+				<Modal key={item.text}>
+					<CardItem
+						ref={refs.current[i]}
+						perspective={display === "grid"}
+					>
+						<Item {...item} />
+					</CardItem>
+				</Modal>
+			))}
+		</Content>
 	);
 }

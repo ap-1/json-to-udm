@@ -1,11 +1,12 @@
 "use client";
 
+import generate from "boring-name-generator";
+import { ReloadIcon } from "@radix-ui/react-icons";
 import {
 	useState,
 	type PropsWithChildren,
 	type MouseEventHandler,
 } from "react";
-import generate from "boring-name-generator";
 
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -29,7 +30,7 @@ import {
 	DrawerClose,
 } from "@/components/ui/drawer";
 import { cn } from "@/lib/utils";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { useMediaQuery } from "@/lib/hooks/use-media-query";
 
 const Form = ({ className }: React.ComponentProps<"form">) => {
 	const [name, setName] = useState(generate().dashed);
@@ -70,56 +71,49 @@ const Form = ({ className }: React.ComponentProps<"form">) => {
 
 export const Modal = ({ children }: PropsWithChildren) => {
 	const [open, setOpen] = useState(false);
+	const isDesktop = useMediaQuery("(min-width: 768px)");
+
+	if (isDesktop) {
+		return (
+			<Dialog open={open} onOpenChange={setOpen}>
+				<DialogTrigger asChild>{children}</DialogTrigger>
+
+				<DialogContent className="sm:max-w-[425px]" overlay="fixed">
+					<DialogHeader>
+						<DialogTitle>Create converter</DialogTitle>
+						<DialogDescription>
+							Pick a name for your converter. Click save when
+							you're done.
+						</DialogDescription>
+					</DialogHeader>
+
+					<Form className="pt-4" />
+				</DialogContent>
+			</Dialog>
+		);
+	}
 
 	return (
-		<>
-			<div className="block sm:hidden">
-				<Drawer open={open} onOpenChange={setOpen}>
-					<DialogTrigger asChild>{children}</DialogTrigger>
+		<Drawer open={open} onOpenChange={setOpen}>
+			<DrawerTrigger asChild>{children}</DrawerTrigger>
 
-					<DrawerContent
-						className="block sm:hidden"
-						overlay="fixed sm:hidden"
-					>
-						<DrawerHeader className="text-left">
-							<DrawerTitle>Create converter</DrawerTitle>
-							<DrawerDescription>
-								Pick a name for your converter. Click save when
-								you're done.
-							</DrawerDescription>
-						</DrawerHeader>
+			<DrawerContent>
+				<DrawerHeader className="text-left">
+					<DrawerTitle>Create converter</DrawerTitle>
+					<DrawerDescription>
+						Pick a name for your converter. Click save when you're
+						done.
+					</DrawerDescription>
+				</DrawerHeader>
 
-						<Form className="px-4" />
+				<Form className="px-4" />
 
-						<DrawerFooter className="pt-2">
-							<DrawerClose asChild>
-								<Button variant="outline">Cancel</Button>
-							</DrawerClose>
-						</DrawerFooter>
-					</DrawerContent>
-				</Drawer>
-			</div>
-
-			<div className="hidden sm:block">
-				<Dialog open={open} onOpenChange={setOpen}>
-					<DrawerTrigger asChild>{children}</DrawerTrigger>
-
-					<DialogContent
-						className="hidden sm:block sm:max-w-[425px]"
-						overlay="sm:fixed"
-					>
-						<DialogHeader>
-							<DialogTitle>Create converter</DialogTitle>
-							<DialogDescription>
-								Pick a name for your converter. Click save when
-								you're done.
-							</DialogDescription>
-						</DialogHeader>
-
-						<Form className="pt-4" />
-					</DialogContent>
-				</Dialog>
-			</div>
-		</>
+				<DrawerFooter className="pt-2">
+					<DrawerClose asChild>
+						<Button variant="outline">Cancel</Button>
+					</DrawerClose>
+				</DrawerFooter>
+			</DrawerContent>
+		</Drawer>
 	);
 };
