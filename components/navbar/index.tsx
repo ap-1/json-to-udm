@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { GitHubLogoIcon, TransformIcon } from "@radix-ui/react-icons";
 
 import { Content } from "@/components/content";
@@ -7,6 +10,8 @@ import { DisplaySwitcher } from "@/components/navbar/display-switcher";
 import { Button } from "@/components/ui/button";
 
 export const Navbar = () => {
+	const pathname = usePathname();
+
 	return (
 		<Content as="nav" className="flex flex-row justify-between h-24">
 			<Link href="/" className="flex flex-row my-auto gap-x-4">
@@ -17,7 +22,7 @@ export const Navbar = () => {
 			</Link>
 
 			<div className="flex items-center gap-x-2">
-				<DisplaySwitcher />
+				{pathname === "/" && <DisplaySwitcher />}
 				<ThemeSwitcher />
 
 				<Link
