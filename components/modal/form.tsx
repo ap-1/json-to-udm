@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import generate from "boring-name-generator";
 
 import { useRouter } from "next/navigation";
-import { ReloadIcon } from "@radix-ui/react-icons";
+import { MagicWandIcon } from "@radix-ui/react-icons";
 import type { ComponentProps, MouseEventHandler } from "react";
 
 import { Input } from "@/components/ui/input";
@@ -69,7 +69,7 @@ export const ConverterForm = ({ className }: ComponentProps<"form">) => {
 										variant="ghost"
 										onClick={onRefresh}
 									>
-										<ReloadIcon className="size-4" />
+										<MagicWandIcon className="size-4" />
 									</Button>
 								</div>
 							</FormControl>
