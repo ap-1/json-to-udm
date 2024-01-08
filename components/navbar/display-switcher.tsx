@@ -1,5 +1,3 @@
-"use client";
-
 import { useAtom } from "jotai/react";
 import { atomWithStorage } from "jotai/utils";
 import type { Dispatch, SetStateAction } from "react";
