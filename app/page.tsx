@@ -32,7 +32,7 @@ const GridItem = forwardRef<
 	<button
 		ref={ref}
 		className={cn(
-			"animate-in slide-in-from-left-2 relative flex items-end border rounded-md group bg-gradient-to-b from-background to-secondary/40 dark:from-secondary/40 from-50% dark:to-background h-80 w-full md:size-80",
+			"will-change-transform animate-in slide-in-from-left-2 relative flex items-end border rounded-md group bg-gradient-to-b from-background to-secondary/40 dark:from-secondary/40 from-50% dark:to-background h-80 w-full md:size-80",
 			className
 		)}
 		{...props}
@@ -56,7 +56,7 @@ const ListItem = forwardRef<
 	<button
 		ref={ref}
 		className={cn(
-			"flex flex-col w-full p-4 transition-all bg-transparent border rounded-md sm:flex-row sm:justify-between animate-in slide-in-from-top-2 hover:bg-secondary/40 sm:h-14",
+			"transition-all flex flex-col w-full p-4 bg-transparent border rounded-md sm:flex-row sm:justify-between animate-in slide-in-from-top-2 hover:bg-secondary/40 sm:h-14",
 			className
 		)}
 		{...props}

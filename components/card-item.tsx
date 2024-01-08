@@ -32,16 +32,36 @@ export const CardItem = forwardRef<
 		const y = (e.clientX - rect.x - rect.width / 2) / 100;
 
 		const keyframes = {
-			transform: `perspective(400px) rotateX(${x}deg) rotateY(${y}deg)`,
+			transform: `perspective(400px) rotateX(${-x}deg) rotateY(${-y}deg) scale3d(1.05, 1.05, 1.05)`,
 		};
 
-		card.animate(keyframes, 250);
+		card.animate(keyframes, {
+			fill: "forwards",
+			duration: 250,
+		});
+	};
+
+	const onMouseLeave: MouseEventHandler<HTMLDivElement> = (e) => {
+		if (!perspective) return;
+
+		const card = clonedRef.current;
+		if (!card) return;
+
+		const keyframes = {
+			transform: `perspective(400px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`,
+		};
+
+		card.animate(keyframes, {
+			fill: "forwards",
+			duration: 125,
+		});
 	};
 
 	return (
 		<div
 			ref={clonedRef}
 			onMouseMove={onMouseMove}
+			onMouseLeave={onMouseLeave}
 			className={cn(
 				className,
 				"dark:bg-inherit will-change-transform rounded-md cursor-pointer group",
