@@ -86,7 +86,7 @@ export default function Home() {
 		.filter(([_key, value]) => value && value !== "{}")
 		.map(([key, value]) => ({
 			text: key,
-			subtext: value.length > 120 ? value.slice(0, 120) + "..." : value,
+			subtext: value.length > 80 ? value.slice(0, 80) + "..." : value,
 			Icon: TransformIcon,
 		}));
 
