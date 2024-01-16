@@ -3,7 +3,6 @@ import { useState, type MouseEventHandler, ChangeEventHandler } from "react";
 import { toast } from "sonner";
 import { gunzipSync } from "zlib";
 
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
