@@ -1,21 +1,27 @@
 import { useAtom } from "jotai/react";
-import { atomWithStorage } from "jotai/utils";
-import type { Dispatch, SetStateAction } from "react";
+import { storageAtom } from "@/lib/local-storage";
 
 import { GridIcon, HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
-export const displayAtom = atomWithStorage<"grid" | "list">("display", "grid");
-
 export const DisplaySwitcher = () => {
-	const [display, setDisplay] = useAtom(displayAtom);
+	const [storage, setStorage] = useAtom(storageAtom);
+
+	const setDisplay = (value: "grid" | "list" | "") => {
+		if (value === "") return;
+
+		setStorage((storage) => ({
+			...storage,
+			display: value,
+		}));
+	};
 
 	return (
 		<ToggleGroup
 			type="single"
 			size="sm"
-			value={display}
-			onValueChange={setDisplay as Dispatch<SetStateAction<string>>}
+			value={storage.display}
+			onValueChange={setDisplay}
 			className="p-[0.125rem] rounded-md bg-accent"
 		>
 			<ToggleGroupItem
