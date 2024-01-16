@@ -153,7 +153,7 @@ export default function Convert() {
 				<div className="w-full space-y-1.5">
 					<Label htmlFor="instructions">Instructions</Label>
 					<Textarea
-						placeholder="Enter any additional instructions here."
+						placeholder="Enter any additional instructions or documentation here."
 						id="instructions"
 					/>
 
