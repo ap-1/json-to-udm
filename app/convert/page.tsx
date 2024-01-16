@@ -192,7 +192,7 @@ export default function Convert() {
 					<Label htmlFor="output">Output</Label>
 					<Textarea
 						readOnly
-						className="h-full min-h-80 my-1.5"
+						className="h-full min-h-80 lg:min-h-[60px] my-1.5"
 						placeholder="LLM output will appear here. To start generating, press Analyze."
 						id="output"
 					/>
