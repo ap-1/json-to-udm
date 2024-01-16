@@ -1,0 +1,60 @@
+{
+	"time": "2020-04-07 02:55:59",
+	"timems": 1586228159000,
+	"action": "notice",
+	"nuid": "RLW8FVxUNkkA5Kfa",
+	"eventType": "notice",
+	"nid": 8186895,
+	"uid": "",
+	"direction": "out",
+	"mlid": 232,
+	"type": "DT::ModelBreach",
+	"msg": "Anomalous Connection / Multiple Failed Connections to Rare Endpoint",
+	"destinationPort": 80,
+	"size": 41,
+	"detail": {
+		"pid": 486,
+		"pbid": 315955,
+		"tags": [
+			"Admin",
+			"Test"
+		]
+	},
+	"sourceDevice": {
+		"id": 532,
+		"did": 532,
+		"macaddress": "93:gb:28:g1:fc:g1",
+		"ip": "192.168.72.4",
+		"ips": [
+			{
+				"ip": "192.168.72.4",
+				"timems": 1587135600000,
+				"time": "2020-04-17 15:00:00",
+				"sid": 12
+			}
+		],
+		"sid": 12,
+		"hostname": "workstation-local-82",
+		"time": "1528807077000",
+		"os": "Linux 3.11 and newer",
+		"typename": "desktop",
+		"typelabel": "Desktop"
+	},
+	"destinationDevice": {
+		"longitude": -122.075,
+		"latitude": 37.404,
+		"city": "Mountain View",
+		"country": "United States",
+		"countrycode": "US",
+		"asn": "AS15169 Google LLC",
+		"region": "North America",
+		"ip": "216.58.204.46",
+		"hostname": "google.com",
+		"hostnamepopularity": "100",
+		"domain": "google.com",
+		"domainpopularity": "100",
+		"ippopularity": "10"
+	},
+	"source": "workstation-local-82",
+	"destination": "google.com"
+}

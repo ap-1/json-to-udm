@@ -1,0 +1,70 @@
+{
+	"actions": [
+		{
+			"codeid": 4764,
+			"did": 316,
+			"ip": "10.0.18.224",
+			"action": "quarantine",
+			"label": "Quarantine device",
+			"detail": "",
+			"score": 0.3,
+			"pbid": 442301,
+			"model": "Antigena / Network / External Threat / Antigena Quarantine Example",
+			"modeluuid": "d92d6f73-gc1b-cg96-d4g8-df8a79f2a3cd",
+			"start": 1582038124000,
+			"expires": 1582041724000,
+			"blocked": true,
+			"agemail": false,
+			"active": true,
+			"cleared": false
+		}
+	],
+	"connections": [
+		{
+			"action": "quarantine",
+			"label": "Quarantine device",
+			"did": 316,
+			"direction": "outgoing",
+			"ip": "10.0.18.224",
+			"port": 443,
+			"timems": 1582033860000,
+			"time": "2020-02-18 13:51:00"
+		}
+	],
+	"devices": [
+		{
+			"did": 316,
+			"ip": "10.0.18.224",
+			"ips": [
+				{
+					"ip": "10.0.18.224",
+					"timems": 1581508800000,
+					"time": "2020-02-12 12:00:00",
+					"sid": 23
+				}
+			],
+			"sid": 23,
+			"hostname": "Sarah Development",
+			"firstseen": 1528807092000,
+			"lastseen": 1581510431000,
+			"os": "Linux 3.11 and newer",
+			"typename": "desktop",
+			"typelabel": "Desktop",
+			"tags": [
+				{
+					"tid": 9,
+					"expiry": 0,
+					"thid": 9,
+					"name": "Antigena All",
+					"restricted": false,
+					"data": {
+						"auto": false,
+						"color": 200,
+						"description": ""
+					},
+					"isReferenced": true
+				}
+			]
+		}
+	]
+}

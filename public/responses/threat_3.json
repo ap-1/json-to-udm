@@ -1,0 +1,85 @@
+{
+	"aiaScore": 100,
+	"children": [
+		"04a3f36e-4u8w-v9dh-x6lb-894778cf9633"
+	],
+	"createdAt": 1646389417644,
+	"category": "suspicious",
+	"currentGroup": "g00b14e94-f744-5ecb-a35a-35a2dda23162",
+	"summary": "A chain of administrative connections were observed between multiple devices, which occurred around the same time, and included workstation-local-82.",
+	"id": "04a3f36e-4u8w-v9dh-x6lb-894778cf9633",
+	"pinned": true,
+	"acknowledged": false,
+	"details": [
+		[
+			{
+				"header": "First Hop",
+				"contents": [
+					{
+						"type": "timestampRange",
+						"key": "Time",
+						"values": [
+							{
+								"start": 1579710063121,
+								"end": 1579711920166
+							}
+						]
+					},
+					{
+						"type": "device",
+						"key": "Source device",
+						"values": [
+							{
+								"sid": 12,
+								"mac": "56:2d:4b:9c:18:42",
+								"ip": "10.12.14.2",
+								"identifier": "Finance File Server",
+								"did": 532,
+								"hostname": null,
+								"subnet": null
+							}
+						]
+					}
+				]
+			}
+		]
+	],
+	"summariser": "LateralMovementCrawler",
+	"relatedBreaches": [
+		{
+			"timestamp": 1579710173000,
+			"threatScore": 19,
+			"pbid": 252317,
+			"modelName": "Anomalous Connection / Active SSH Tunnel"
+		}
+	],
+	"breachDevices": [
+		{
+			"sid": 10,
+			"mac": "93:gb:28:g1:fc:g1",
+			"ip": "10.0.18.224",
+			"identifier": "workstation-local-82",
+			"did": 230,
+			"hostname": "workstation-local-82",
+			"subnet": null
+		}
+	],
+	"periods": [
+		{
+			"start": 1579708374972,
+			"end": 1579711920166
+		}
+	],
+	"attackPhases": [
+		5
+	],
+	"groupingIds": [
+		"544a6ce7"
+	],
+	"activityId": "ae463dc8",
+	"groupByActivity": false,
+	"groupCategory": "suspicious",
+	"groupScore": 70,
+	"groupPreviousGroups": [],
+	"title": "Suspicious Chain of Administrative Connections"
+}
