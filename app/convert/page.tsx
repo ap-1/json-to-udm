@@ -6,7 +6,7 @@ import { storageAtom } from "@/lib/local-storage";
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTheme } from "next-themes";
-import { EraserIcon } from "@radix-ui/react-icons";
+import { EraserIcon, MagicWandIcon } from "@radix-ui/react-icons";
 
 import Editor from "@monaco-editor/react";
 import { toast } from "sonner";
@@ -15,6 +15,8 @@ import { Content } from "@/components/content";
 import { Combobox } from "@/components/combobox";
 import { Button } from "@/components/ui/button";
 import { Modals } from "@/app/convert/modals";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 
 const files = [
 	"threat_1.json",
@@ -104,7 +106,7 @@ export default function Convert() {
 	return (
 		<Content
 			as="main"
-			className="py-8 h-[calc(100vh-6rem)] overflow-hidden"
+			className="flex flex-col gap-8 lg:gap-y-0 lg:flex-row py-8 h-[calc(100vh-6rem)]"
 		>
 			<div className="w-full lg:w-1/2 h-[calc(100%-2rem)] space-y-2 flex flex-col">
 				<div className="flex justify-between">
@@ -138,6 +140,27 @@ export default function Convert() {
 					className="border rounded-md overflow-hidden"
 					theme={resolvedTheme === "dark" ? "vs-dark" : "light"}
 				/>
+			</div>
+
+			<div className="w-full lg:w-1/2 h-[calc(100%-2rem)] space-y-2 flex flex-col pb-8">
+				<div className="flex flex-row justify-end">
+					<Button>
+						<MagicWandIcon className="size-4 mr-2" />
+						Analyze
+					</Button>
+				</div>
+
+				<div className="w-full space-y-1.5">
+					<Label htmlFor="instructions">Instructions</Label>
+					<Textarea
+						placeholder="Enter any additional instructions here."
+						id="instructions"
+					/>
+
+					<p className="text-sm text-muted-foreground">
+						This will be added to the LLM's initial context window.
+					</p>
+				</div>
 			</div>
 		</Content>
 	);
