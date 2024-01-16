@@ -51,7 +51,7 @@ export const Load = ({
 	return (
 		<div className={cn("flex flex-col space-y-4 items-center", className)}>
 			<div className={cn("w-full space-y-1.5", !showCancel && "px-2")}>
-				<Label htmlFor="content">Your content</Label>
+				<Label htmlFor="content">Content</Label>
 				<Textarea
 					value={value}
 					onChange={onChange}
