@@ -1,9 +1,12 @@
 "use client";
 
+import { useAtom } from "jotai/react";
+import { storageAtom } from "@/lib/local-storage";
+
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTheme } from "next-themes";
-import { EraserIcon, TrashIcon } from "@radix-ui/react-icons";
+import { EraserIcon } from "@radix-ui/react-icons";
 
 import Editor from "@monaco-editor/react";
 import { toast } from "sonner";
@@ -11,11 +14,7 @@ import { toast } from "sonner";
 import { Content } from "@/components/content";
 import { Combobox } from "@/components/combobox";
 import { Button } from "@/components/ui/button";
-
-import { useAtom } from "jotai/react";
-import { storageAtom } from "@/lib/local-storage";
-import { Modal } from "@/components/modal";
-import { Confirmation } from "@/app/convert/confirmation";
+import { Modals } from "@/app/convert/modals";
 
 const files = [
 	"threat_1.json",
@@ -41,7 +40,6 @@ export default function Convert() {
 
 	const [fileName, setFileName] = useState<FileName | null>(null);
 	const [content, setRawContent] = useState(storage.converters[name] ?? "{}");
-	const [deleteOpen, setDeleteOpen] = useState(false);
 
 	if (!storage.converters.hasOwnProperty(name)) {
 		setStorage((storage) => ({
@@ -92,7 +90,6 @@ export default function Convert() {
 			},
 		});
 
-		setDeleteOpen(false);
 		router.push("/");
 	};
 
@@ -127,31 +124,11 @@ export default function Convert() {
 						</Button>
 					</div>
 
-					<Modal
-						open={deleteOpen}
-						setOpen={setDeleteOpen}
-						title="Are you absolutely sure?"
-						description="This action is irreversible. You will not be able to restore this converter."
-						dialogItem={
-							<Confirmation
-								showCancel
-								onCancel={() => setDeleteOpen(false)}
-								onConfirm={() => deleteConverter()}
-							/>
-						}
-						drawerItem={
-							<Confirmation
-								className="px-4"
-								onCancel={() => setDeleteOpen(false)}
-								onConfirm={() => deleteConverter()}
-							/>
-						}
-					>
-						<Button className="px-2 sm:px-4" variant="destructive">
-							<p className="hidden sm:block">Delete</p>
-							<TrashIcon className="size-5" />
-						</Button>
-					</Modal>
+					<Modals
+						content={content}
+						setContent={setContent}
+						deleteConverter={deleteConverter}
+					/>
 				</div>
 
 				<Editor

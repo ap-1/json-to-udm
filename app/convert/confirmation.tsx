@@ -46,7 +46,10 @@ export const Confirmation = ({
 				disabled={submitting}
 			>
 				{submitting ? (
-					<ReloadIcon className="size-4 animate-spin" />
+					<>
+						<ReloadIcon className="size-4 animate-spin mr-2" />{" "}
+						Please wait...
+					</>
 				) : (
 					"Confirm"
 				)}
