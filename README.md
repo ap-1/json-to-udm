@@ -6,6 +6,8 @@ The Chronicle Ingestion API works with a special format called UDM. Because secu
 
 This tool is a web application that leverages LLM technology to convert JSON into UDM. It is a website built with [Next.js](http://nextjs.org) and powered by [Bun](http://bun.sh).
 
+Example security responses are sourced from the [Darktrace](https://darktrace.com/) Threat Visualizer v5.2 API Guide.
+
 ## Stack
 
 Additional technologies include:

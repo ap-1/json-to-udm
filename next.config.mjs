@@ -1,3 +1,4 @@
+import "./env.mjs";
 import million from "million/compiler";
 
 /** @type {import('next').NextConfig} */
