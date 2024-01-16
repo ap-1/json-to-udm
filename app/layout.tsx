@@ -3,6 +3,7 @@ import type { PropsWithChildren } from "react";
 import type { Metadata } from "next";
 
 import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 
 import { GeistSans } from "geist/font/sans";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: PropsWithChildren) {
 					<ThemeProvider>
 						<Navbar />
 						{children}
+						<Toaster />
 					</ThemeProvider>
 				</Provider>
 			</body>

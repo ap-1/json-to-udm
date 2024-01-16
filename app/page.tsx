@@ -1,21 +1,24 @@
 "use client";
 
 import { useAtomValue } from "jotai/react";
+import { useRouter } from "next/navigation";
 import {
+	useState,
 	forwardRef,
 	type ElementRef,
 	type ForwardRefExoticComponent,
 	type RefAttributes,
 } from "react";
 
-import { PlusIcon } from "@radix-ui/react-icons";
+import { PlusIcon, TransformIcon } from "@radix-ui/react-icons";
 import type { IconProps } from "@radix-ui/react-icons/dist/types";
 
 import { Modal } from "@/components/modal";
 import { CardItem } from "@/components/card-item";
 import { Content } from "@/components/content";
-import { displayAtom } from "@/components/navbar/display-switcher";
+import { ConverterForm } from "@/app/converter-form";
 
+import { storageAtom } from "@/lib/local-storage";
 import { useCards } from "@/lib/hooks/use-cards";
 import { cn } from "@/lib/utils";
 
@@ -74,8 +77,18 @@ const ListItem = forwardRef<
 ListItem.displayName = "ListItem";
 
 export default function Home() {
-	const display = useAtomValue(displayAtom);
+	const router = useRouter();
+
+	const { display, converters } = useAtomValue(storageAtom);
 	const Item = display === "grid" ? GridItem : ListItem;
+
+	const list = Object.entries(converters)
+		.filter(([_key, value]) => value && value !== "{}")
+		.map(([key, value]) => ({
+			text: key,
+			subtext: value.length > 120 ? value.slice(0, 120) + "..." : value,
+			Icon: TransformIcon,
+		}));
 
 	const items = [
 		{
@@ -83,8 +96,10 @@ export default function Home() {
 			subtext: "Use AI to analyze a JSON response",
 			Icon: PlusIcon,
 		},
+		...list,
 	];
 
+	const [open, setOpen] = useState(false);
 	const [refs, onMouseMove] = useCards(items.length);
 
 	return (
@@ -96,15 +111,30 @@ export default function Home() {
 				display === "grid" && "md:grid-cols-[repeat(auto-fill,20rem)]"
 			)}
 		>
-			{items.map((item, i) => (
-				<Modal key={item.text}>
-					<CardItem
-						ref={refs.current[i]}
-						perspective={display === "grid"}
-					>
-						<Item {...item} />
-					</CardItem>
-				</Modal>
+			<Modal
+				open={open}
+				setOpen={setOpen}
+				title="Create converter"
+				description="Pick a name for your converter. Click continue when you're finished."
+				dialogItem={<ConverterForm />}
+				drawerItem={<ConverterForm className="px-4" />}
+			>
+				<CardItem
+					ref={refs.current[0]}
+					perspective={display === "grid"}
+				>
+					<Item {...items[0]} />
+				</CardItem>
+			</Modal>
+
+			{items.slice(1).map((item, i) => (
+				<CardItem
+					ref={refs.current[i + 1]}
+					perspective={display === "grid"}
+					onClick={() => router.push(`/convert?name=${item.text}`)}
+				>
+					<Item {...item} />
+				</CardItem>
 			))}
 		</Content>
 	);
