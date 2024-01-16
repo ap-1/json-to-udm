@@ -21,6 +21,13 @@ import {
 	FormDescription,
 	FormMessage,
 } from "@/components/ui/form";
+import {
+	TooltipProvider,
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+} from "@/components/ui/tooltip";
+
 import { cn } from "@/lib/utils";
 
 const schema = z.object({
@@ -64,13 +71,24 @@ export const ConverterForm = ({ className }: ComponentProps<"form">) => {
 							<FormControl>
 								<div className="flex space-x-1">
 									<Input {...field} />
-									<Button
-										variant="outline"
-										size="icon"
-										onClick={onRefresh}
-									>
-										<UpdateIcon className="size-4" />
-									</Button>
+
+									<TooltipProvider>
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<Button
+													variant="outline"
+													size="icon"
+													onClick={onRefresh}
+												>
+													<UpdateIcon className="size-4" />
+												</Button>
+											</TooltipTrigger>
+
+											<TooltipContent>
+												<p>New name</p>
+											</TooltipContent>
+										</Tooltip>
+									</TooltipProvider>
 								</div>
 							</FormControl>
 

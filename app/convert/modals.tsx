@@ -10,6 +10,12 @@ import { Confirmation } from "@/app/convert/confirmation";
 import { Share } from "@/app/convert/share";
 import { Load } from "@/app/convert/load";
 import { Button } from "@/components/ui/button";
+import {
+	TooltipProvider,
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+} from "@/components/ui/tooltip";
 
 interface ModelsProps {
 	content: string;
@@ -17,7 +23,11 @@ interface ModelsProps {
 	deleteConverter: () => void;
 }
 
-export const Modals = ({ content, setContent, deleteConverter }: ModelsProps) => {
+export const Modals = ({
+	content,
+	setContent,
+	deleteConverter,
+}: ModelsProps) => {
 	const [shareOpen, setShareOpen] = useState(false);
 	const [loadOpen, setLoadOpen] = useState(false);
 	const [deleteOpen, setDeleteOpen] = useState(false);
@@ -55,9 +65,19 @@ export const Modals = ({ content, setContent, deleteConverter }: ModelsProps) =>
 						variant="ghost"
 						className="rounded-none h-[calc(2.25rem-2px)]"
 					>
-						<div className="size-5 flex items-center justify-center">
-							<ClipboardCopyIcon className="size-4" />
-						</div>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div className="size-5 flex items-center justify-center">
+										<ClipboardCopyIcon className="size-4" />
+									</div>
+								</TooltipTrigger>
+
+								<TooltipContent>
+									<p>Share JSON</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</Button>
 				</Modal>
 
@@ -88,9 +108,19 @@ export const Modals = ({ content, setContent, deleteConverter }: ModelsProps) =>
 						variant="ghost"
 						className="rounded-none h-[calc(2.25rem-2px)]"
 					>
-						<div className="size-5 flex items-center justify-center">
-							<UploadIcon className="size-4" />
-						</div>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<div className="size-5 flex items-center justify-center">
+										<UploadIcon className="size-4" />
+									</div>
+								</TooltipTrigger>
+
+								<TooltipContent>
+									<p>Load JSON</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</Button>
 				</Modal>
 			</div>

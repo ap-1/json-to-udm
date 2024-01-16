@@ -13,10 +13,16 @@ import { toast } from "sonner";
 
 import { Content } from "@/components/content";
 import { Combobox } from "@/components/combobox";
-import { Button } from "@/components/ui/button";
 import { Modals } from "@/app/convert/modals";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+	TooltipProvider,
+	Tooltip,
+	TooltipTrigger,
+	TooltipContent,
+} from "@/components/ui/tooltip";
 
 const files = [
 	"threat_1.json",
@@ -117,13 +123,23 @@ export default function Convert() {
 							files={files}
 						/>
 
-						<Button
-							variant="outline"
-							size="icon"
-							onClick={resetContent}
-						>
-							<EraserIcon className="size-5" />
-						</Button>
+						<TooltipProvider>
+							<Tooltip>
+								<TooltipTrigger asChild>
+									<Button
+										variant="outline"
+										size="icon"
+										onClick={resetContent}
+									>
+										<EraserIcon className="size-5" />
+									</Button>
+								</TooltipTrigger>
+
+								<TooltipContent>
+									<p>Clear JSON</p>
+								</TooltipContent>
+							</Tooltip>
+						</TooltipProvider>
 					</div>
 
 					<Modals
