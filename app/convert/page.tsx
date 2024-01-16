@@ -3,7 +3,7 @@
 import { useAtom } from "jotai/react";
 import { storageAtom } from "@/lib/local-storage";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, type ChangeEventHandler } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useTheme } from "next-themes";
 import { EraserIcon, MagicWandIcon } from "@radix-ui/react-icons";
@@ -48,6 +48,12 @@ export default function Convert() {
 
 	const [fileName, setFileName] = useState<FileName | null>(null);
 	const [content, setRawContent] = useState(storage.converters[name] ?? "{}");
+	const [instructions, setInstructions] = useState("");
+
+	const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+		e.preventDefault();
+		setInstructions(e.target.value);
+	};
 
 	if (!storage.converters.hasOwnProperty(name)) {
 		setStorage((storage) => ({
@@ -158,7 +164,7 @@ export default function Convert() {
 				/>
 			</div>
 
-			<div className="w-full lg:w-1/2 h-[calc(100%-2rem)] space-y-2 flex flex-col pb-8">
+			<div className="w-full lg:w-1/2 h-[calc(100%-2rem)] space-y-2 flex flex-col pb-8 lg:pb-0">
 				<div className="flex flex-row justify-end">
 					<Button>
 						<MagicWandIcon className="size-4 mr-2" />
@@ -166,15 +172,34 @@ export default function Convert() {
 					</Button>
 				</div>
 
-				<div className="w-full space-y-1.5">
-					<Label htmlFor="instructions">Instructions</Label>
+				<div className="h-full flex flex-col">
+					<div className="mb-8">
+						<Label htmlFor="instructions">Instructions</Label>
+						<Textarea
+							value={instructions}
+							onChange={onChange}
+							className="mb-1.5"
+							placeholder="Enter any additional instructions or documentation here."
+							id="instructions"
+						/>
+
+						<p className="text-sm text-muted-foreground">
+							This will be added to the LLM's initial context
+							window.
+						</p>
+					</div>
+
+					<Label htmlFor="output">Output</Label>
 					<Textarea
-						placeholder="Enter any additional instructions or documentation here."
-						id="instructions"
+						readOnly
+						className="h-full min-h-80 my-1.5"
+						placeholder="LLM output will appear here. To start generating, press Analyze."
+						id="output"
 					/>
 
 					<p className="text-sm text-muted-foreground">
-						This will be added to the LLM's initial context window.
+						Changes to JSON are saved automatically, but you will
+						have to re-analyze to see those changes reflected.
 					</p>
 				</div>
 			</div>
